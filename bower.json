@@ -1,0 +1,22 @@
+{
+  "name": "ytplay",
+  "main": "ytplay.js",
+  "authors": [
+    "Hay Kranen"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "youtube",
+    "video",
+    "ios",
+    "movie"
+  ],
+  "homepage": "https://github.com/hay/ytplay",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

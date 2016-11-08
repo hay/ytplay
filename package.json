@@ -1,0 +1,24 @@
+{
+  "name": "ytplay",
+  "version": "0.1.0",
+  "main": "ytplay.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hay/ytplay.git"
+  },
+  "keywords": [
+    "youtube",
+    "video",
+    "ios",
+    "movie"
+  ],
+  "author": "Hay Kranen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hay/ytplay/issues"
+  },
+  "homepage": "https://github.com/hay/ytplay#readme"
+}

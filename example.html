@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title></title>
+    <style>
+        iframe {
+            max-width: 100vw;
+        }
+
+        button {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="ytplay"></div>
+    <br>
+    <button>play</button>
+    <output></output>
+
+    <script src="ytplay.js"></script>
+
+    <script>
+        var $ = document.querySelector.bind(document);
+        var videos = ['Kb_baNWeJeI', 'twyLYjW6-TA', 'w_vC0ynJ6vE'];
+        var index = -1;
+        var el = $("#ytplay");
+        var player = new Ytplay(el);
+
+        document.querySelector('button').addEventListener('click', function() {
+            index = (index + 1) % videos.length;
+            var video = videos[index];
+            player.play(video);
+            $("output").innerHTML = video;
+        });
+    </script>
+</body>
+</html>
