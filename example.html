@@ -26,14 +26,21 @@
         var $ = document.querySelector.bind(document);
         var videos = ['Kb_baNWeJeI', 'twyLYjW6-TA', 'w_vC0ynJ6vE'];
         var index = -1;
+        var output = $("output");
         var el = $("#ytplay");
-        var player = new Ytplay(el);
+        var player = new Ytplay(el, {
+            width : 400,
+            height : 300,
+            onReady : function() {
+                output.innerHTML = 'ready';
+            }
+        });
 
         document.querySelector('button').addEventListener('click', function() {
             index = (index + 1) % videos.length;
             var video = videos[index];
             player.play(video);
-            $("output").innerHTML = video;
+            output.innerHTML = video;
         });
     </script>
 </body>

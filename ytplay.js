@@ -8,6 +8,21 @@
         }
     };
 
+    function isIos() {
+        return (/iP(hone|od|ad)/.test(navigator.platform));
+    }
+
+    function isNewerIos() {
+        // This CSS property was only added in iOS 10
+        return 'object-position' in document.head.style;
+    }
+
+    function loadApi() {
+        var script = document.createElement('script');
+        script.src = '//www.youtube.com/iframe_api';
+        document.head.appendChild(script);
+    }
+
     function Ytplay(element, opts) {
         if (typeof element !== 'object') {
             throw new Error("ytplay: invalid element given");
@@ -23,8 +38,8 @@
 
         this.log('Initialized ytplay with', element, opts);
         this.element = element;
-        this.setupCallback();
-        this.loadApi();
+        this._setupCallback();
+        loadApi();
     }
 
     Ytplay.prototype = {
@@ -32,19 +47,8 @@
             return this.element;
         },
 
-        isIos : function() {
-            return (/iP(hone|od|ad)/.test(navigator.platform));
-        },
-
-        isNewerIos : function() {
-            // This CSS property was only added in iOS 10
-            return 'object-position' in document.head.style;
-        },
-
-        loadApi : function() {
-            var script = document.createElement('script');
-            script.src = '//www.youtube.com/iframe_api';
-            document.head.appendChild(script);
+        getPlayer : function() {
+            return this.player;
         },
 
         log : function() {
@@ -54,7 +58,7 @@
         },
 
         play : function(id) {
-            if (this.isIos() && !this.isNewerIos()) {
+            if (isIos() && !isNewerIos()) {
                 // Older versions of iOS need this
                 this.player.cueVideoById(id);
             } else {
@@ -62,11 +66,15 @@
             }
         },
 
-        setupCallback : function() {
+        _setupCallback : function() {
             var self = this;
 
             window.onYouTubeIframeAPIReady = function() {
                 self.player = new YT.Player(self.element, self.opts);
+
+                if (self.opts.onReady) {
+                    self.opts.onReady(self.player);
+                }
             }
         }
     };
